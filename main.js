@@ -1,3 +1,7 @@
+/*
+/Drawing
+*/
+
 //ES5 doesn't have const so just don't modify these
 var pixelSize = 4;
 var pixelWidth = width / pixelSize;
@@ -191,18 +195,135 @@ function drawText(x, y, size, color, message)
     }
 }
 
+/*
+/External Button Class
+/Modified to fit better with the program
+*/
+var Button = function(config) {
+    this.isButton = true;
+    this.xOffset = config.xOffset || 0;
+    this.yOffset = config.yOffset || 0;
+    this.x = config.x || 0;
+    this.y = config.y || 0;
+    this.width = config.width || 150;
+    this.height = config.height || 50;
+    this.label = config.label || "Click";
+    this.onClick = config.onClick || function() {};
+};
+
+Button.prototype.draw = function() {
+    fillRect(this.x, this.y, this.width, this.height, colors.light);
+    drawText(this.x + this.xOffset, this.y + this.yOffset, 5, colors.dark, this.label);
+};
+
+Button.prototype.isMouseInside = function() {
+    var trueX = this.x * pixelSize;
+    var trueY = this.y * pixelSize;
+    var trueW = this.width * pixelSize;
+    var trueH = this.height * pixelSize;
+    
+    return mouseX > trueX &&
+           mouseX < (trueX + trueW) &&
+           mouseY > trueY &&
+           mouseY < (trueY + trueH);
+};
+
+Button.prototype.handleMouseClick = function() {
+    if (this.isMouseInside()) {
+        this.onClick();
+    }
+};
+
+/*
+/Classes
+*/
+function Text(x, y, size, color, t)
+{
+    this.x = x;
+    this.y = y;
+    this.size = size;
+    this.color = color;
+    this.t = t;
+    
+    this.update = function() {};
+    
+    this.draw = function() {
+        drawText(this.x, this.y, this.size, this.color, this.t);
+    };
+}
+
+/*
+/Scenes
+*/
+
+function Scene()
+{
+    this.objects = [];
+    this.update = function() {};
+    this.draw = function()
+    {
+        for (var i in this.objects)
+        {
+            this.objects[i].draw();
+        }
+    };
+}
+
+function Game()
+{
+    this.scenes = [ new Scene() ];
+    this.currentScene = 0;
+    this.update = function() {this.scenes[this.currentScene].update(); };
+    this.draw = function() { this.scenes[this.currentScene].draw(); };
+}
+
+var game = new Game();
+
 function init()
 {
     noStroke();
+
+    frameRate(5);
     
-    background(colors.dark);
-    drawText(5, 10, 15, colors.light, "Snake");
+    draw = function() {
+        game.update();
+        
+        background(colors.dark);
+        game.draw();
+    };
+    
+    mouseClicked = function()
+    {
+        for (var i in game.scenes[game.currentScene].objects)
+        {
+            if (game.scenes[game.currentScene].objects[i].isButton)
+            {
+                game.scenes[game.currentScene].objects[i].handleMouseClick();
+            }
+        }
+    };
 }
 
 /*
 /
-/
+/Game
 /
 */
 
 init();
+
+//Main menu
+game.scenes[0].objects.push(new Text(5, 10, 15, colors.light, "Snake"));
+game.scenes[0].objects.push(new Button({
+    x: 15,
+    y: 40,
+    width: 40,
+    height: 10,
+    label: "Play",
+    xOffset: 4,
+    yOffset: 2,
+    onClick: function() { game.currentScene = 1; }
+}));
+
+game.scenes.push(new Scene());
+game.scenes[1].objects.push(new Text(5, 10, 15, colors.light, "Game"));
