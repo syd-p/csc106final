@@ -36,161 +36,161 @@ function drawText(x, y, size, color, message)
         //A B C D E F G H K L M N O P Q R U W 6 8 0 have a left line
         if (char === "a" || char === "b" || char === "c" || char === "d" || char === "e" || char === "f" || char === "g" || char === "h" || char === "k" || char === "l" || char === "m" || char === "n" || char === "o" || char === "p" || char === "q" || char === "r" || char === "u" || char === "w" || char === "6" || char === "8" || char === "0")
         {
-            fillRect(x + (i * size) + (i * 4), y, fifth, size, color);
+            fillRect(x + (i * size) + (i * 2), y, fifth, size, color);
         }
         
         //A B C E F G I J O P Q R S T Z 2 3 5 6 7 8 9 0 have a top line
         if (char === "a" || char === "b" || char === "c" || char === "e" || char === "f" || char === "g" || char === "i" || char === "j" || char === "o" || char === "p" || char === "q" || char === "r" || char === "s" || char === "t" || char === "z" || char === "2" || char === "3" || char === "5" || char === "6" || char === "7" || char === "8" || char === "9" || char === "0")
         {
-            fillRect(x + (i * size) + (i * 4), y, size, fifth, color);
+            fillRect(x + (i * size) + (i * 2), y, size, fifth, color);
         }
         
         //B C E G I L O S U Z 1 2 3 5 6 8 0 have a bottom line
         if (char === "b" || char === "c" || char === "e" || char === "g" || char === "i" || char === "l" || char === "o" || char === "s" || char === "u" || char === "z" || char === "1" || char === "2" || char === "3" || char === "5" || char === "6" || char === "8" || char === "0")
         {
-            fillRect(x + (i * size) + (i * 4), y + (size - fifth), size, fifth, color);
+            fillRect(x + (i * size) + (i * 2), y + (size - fifth), size, fifth, color);
         }
         
         //A H M N O U W 3 4 7 8 9 0 have a right line
         if (char === "a" || char === "h" || char === "m" || char === "n" || char === "o" || char === "u" || char === "w" || char === "3" || char === "4" || char === "7" || char === "8" || char === "9" || char === "0")
         {
-            fillRect(x + (i * size) + (i * 4) + (size - fifth), y, fifth, size, color);
+            fillRect(x + (i * size) + (i * 2) + (size - fifth), y, fifth, size, color);
         }
         
         //A E F H P R S 2 3 4 5 6 8 9 - have a middle line
         if (char === "a" || char === "e" || char === "f" || char === "h" || char === "p" || char === "r" || char === "s" || char === "2" || char === "3" || char === "4" || char === "5" || char === "6" || char === "8" || char === "9" || char === "-")
         {
-            fillRect(x + (i * size) + (i * 4), y + (size - round(size / 2)), size, fifth, color);
+            fillRect(x + (i * size) + (i * 2), y + (size - round(size / 2)), size, fifth, color);
         }
         
         //I J T 1 have a middle vertical line
         if (char === "i" || char === "j" || char === "t" || char === "1")
         {
-            fillRect(x + (i * size) + (i * 4) + (size - round(size / 2)), y, fifth, size, color);
+            fillRect(x + (i * size) + (i * 2) + (size - round(size / 2)), y, fifth, size, color);
         }
         
         //P Q R 2 have a top right line
         if (char === "p" || char === "q" || char === "r" || char === "2")
         {
-            fillRect(x + (i * size) + (i * 4) + (size - fifth), y, fifth, round(size / 2), color);
+            fillRect(x + (i * size) + (i * 2) + (size - fifth), y, fifth, round(size / 2), color);
         }
         
         // S 4 5 9 have a top left line
         if (char === "s" || char === "4" || char === "5" || char === "9")
         {
-            fillRect(x + (i * size) + (i * 4), y, fifth, round(size / 2), color);
+            fillRect(x + (i * size) + (i * 2), y, fifth, round(size / 2), color);
         }
         
         //J Z 2 have a bottom left line
         if (char === "j" || char === "z" || char === "2")
         {
-            fillRect(x + (i * size) + (i * 4), y + (size - round(size / 2)) + 1, fifth, round(size / 2) - 1, color);
+            fillRect(x + (i * size) + (i * 2), y + (size - round(size / 2)) + 1, fifth, round(size / 2) - 1, color);
         }
         
         //B G S 5 6 have a bottom right line
         if (char === "b" || char ==="g" || char === "s" || char === "5" || char === "6")
         {
-            fillRect(x + (i * size) + (i * 4) + (size - fifth), y + (size - round(size / 2)) + 1, fifth, round(size / 2) - 1, color);
+            fillRect(x + (i * size) + (i * 2) + (size - fifth), y + (size - round(size / 2)) + 1, fifth, round(size / 2) - 1, color);
         }
         
         //Random parts
         if (char === "j" || char === "q")
         {
-            fillRect(x + (i * size) + (i * 4), y + (size - fifth), round(size / 2), fifth, color);
+            fillRect(x + (i * size) + (i * 2), y + (size - fifth), round(size / 2), fifth, color);
         }
         
         if (char === "k" || char === "x" || char === "y" || char === "/")
         {
-            fillRect(x + (i * size) + (i * 4) + (size - fifth), y, fifth, fifth, color);
-            fillRect(x + (i * size) + (i * 4) + (size - (fifth * 2)), y + fifth, fifth, fifth, color);
-            fillRect(x + (i * size) + (i * 4) + (size - (fifth * 3)), y + (fifth * 2), fifth, fifth, color);
+            fillRect(x + (i * size) + (i * 2) + (size - fifth), y, fifth, fifth, color);
+            fillRect(x + (i * size) + (i * 2) + (size - (fifth * 2)), y + fifth, fifth, fifth, color);
+            fillRect(x + (i * size) + (i * 2) + (size - (fifth * 3)), y + (fifth * 2), fifth, fifth, color);
         }
         
         if (char === "k" || char === "n" || char === "q" || char === "r" || char === "x" || char === "\\")
         {
-            fillRect(x + (i * size) + (i * 4) + (size - (fifth * 3)), y + (fifth * 2), fifth, fifth, color);
-            fillRect(x + (i * size) + (i * 4) + (size - (fifth * 2)), y + (fifth * 3), fifth, fifth, color);
-            fillRect(x + (i * size) + (i * 4) + (size - fifth), y + (fifth * 4), fifth, fifth, color);
+            fillRect(x + (i * size) + (i * 2) + (size - (fifth * 3)), y + (fifth * 2), fifth, fifth, color);
+            fillRect(x + (i * size) + (i * 2) + (size - (fifth * 2)), y + (fifth * 3), fifth, fifth, color);
+            fillRect(x + (i * size) + (i * 2) + (size - fifth), y + (fifth * 4), fifth, fifth, color);
         }
         
         if (char === "n" || char === "x" || char === "y" || char === "\\")
         {
-            fillRect(x + (i * size) + (i * 4), y, fifth, fifth, color);
-            fillRect(x + (i * size) + (i * 4) + fifth, y + fifth, fifth, fifth, color);
+            fillRect(x + (i * size) + (i * 2), y, fifth, fifth, color);
+            fillRect(x + (i * size) + (i * 2) + fifth, y + fifth, fifth, fifth, color);
         }
         
         if (char === "x" || char === "/")
         {
-            fillRect(x + (i * size) + (i * 4), y + (size - fifth), fifth, fifth, color);
-            fillRect(x + (i * size) + (i * 4) + fifth, y + (size - (fifth * 2)), fifth, fifth, color);
+            fillRect(x + (i * size) + (i * 2), y + (size - fifth), fifth, fifth, color);
+            fillRect(x + (i * size) + (i * 2) + fifth, y + (size - (fifth * 2)), fifth, fifth, color);
         }
         
         if (char === "b")
         {
-            fillRect(x + (i * size) + (i * 4) + (size - (fifth * 3)), y + (fifth * 2), fifth, fifth, color);
-            fillRect(x + (i * size) + (i * 4) + (size - (fifth * 2)), y + (fifth * 2), fifth, fifth, color);
-            fillRect(x + (i * size) + (i * 4) + (size - fifth), y + fifth, fifth, fifth, color);
+            fillRect(x + (i * size) + (i * 2) + (size - (fifth * 3)), y + (fifth * 2), fifth, fifth, color);
+            fillRect(x + (i * size) + (i * 2) + (size - (fifth * 2)), y + (fifth * 2), fifth, fifth, color);
+            fillRect(x + (i * size) + (i * 2) + (size - fifth), y + fifth, fifth, fifth, color);
         }
         
         if (char === "d")
         {
-            fillRect(x + (i * size) + (i * 4), y, size - fifth, fifth, color);
-            fillRect(x + (i * size) + (i * 4), y + (fifth * 4), size - fifth, fifth, color);
-            fillRect(x + (i * size) + (i * 4) + (size - fifth), y + fifth, fifth, fifth * 3, color);
+            fillRect(x + (i * size) + (i * 2), y, size - fifth, fifth, color);
+            fillRect(x + (i * size) + (i * 2), y + (fifth * 4), size - fifth, fifth, color);
+            fillRect(x + (i * size) + (i * 2) + (size - fifth), y + fifth, fifth, fifth * 3, color);
         }
         
         if (char === "g")
         {
-            fillRect(x + (i * size) + (i * 4) + (fifth * 2), y + (fifth * 2), fifth * 3, fifth, color);
+            fillRect(x + (i * size) + (i * 2) + (fifth * 2), y + (fifth * 2), fifth * 3, fifth, color);
         }
         
         if (char === "k")
         {
-            fillRect(x + (i * size) + (i * 4) + fifth, y + (fifth * 2), fifth, fifth, color);
+            fillRect(x + (i * size) + (i * 2) + fifth, y + (fifth * 2), fifth, fifth, color);
         }
         
         if (char === "m")
         {
-            fillRect(x + (i * size) + (i * 4) + fifth, y, fifth, fifth, color);
-            fillRect(x + (i * size) + (i * 4) + (fifth * 3), y, fifth, fifth, color);
-            fillRect(x + (i * size) + (i * 4) + (fifth * 2), y + fifth, fifth, fifth * 2, color);
+            fillRect(x + (i * size) + (i * 2) + fifth, y, fifth, fifth, color);
+            fillRect(x + (i * size) + (i * 2) + (fifth * 3), y, fifth, fifth, color);
+            fillRect(x + (i * size) + (i * 2) + (fifth * 2), y + fifth, fifth, fifth * 2, color);
         }
         
         if (char === "v")
         {
-            fillRect(x + (i * size) + (i * 4), y, fifth, fifth * 2, color);
-            fillRect(x + (i * size) + (i * 4) + (size - fifth), y, fifth, fifth * 2, color);
-            fillRect(x + (i * size) + (i * 4) + fifth, y + (fifth * 2), fifth, fifth * 2, color);
-            fillRect(x + (i * size) + (i * 4) + (size - (fifth * 2)), y + (fifth * 2), fifth, fifth * 2, color);
-            fillRect(x + (i * size) + (i * 4) + (fifth * 2), y + (size - fifth), fifth, fifth, color);
+            fillRect(x + (i * size) + (i * 2), y, fifth, fifth * 2, color);
+            fillRect(x + (i * size) + (i * 2) + (size - fifth), y, fifth, fifth * 2, color);
+            fillRect(x + (i * size) + (i * 2) + fifth, y + (fifth * 2), fifth, fifth * 2, color);
+            fillRect(x + (i * size) + (i * 2) + (size - (fifth * 2)), y + (fifth * 2), fifth, fifth * 2, color);
+            fillRect(x + (i * size) + (i * 2) + (fifth * 2), y + (size - fifth), fifth, fifth, color);
         }
         
         if (char === "w")
         {
-            fillRect(x + (i * size) + (i * 4) + fifth, y + (size - fifth), fifth, fifth, color);
-            fillRect(x + (i * size) + (i * 4) + (fifth * 3), y + (size - fifth), fifth, fifth, color);
-            fillRect(x + (i * size) + (i * 4) + (fifth * 2), y + (fifth * 2), fifth, fifth * 2, color);
+            fillRect(x + (i * size) + (i * 2) + fifth, y + (size - fifth), fifth, fifth, color);
+            fillRect(x + (i * size) + (i * 2) + (fifth * 3), y + (size - fifth), fifth, fifth, color);
+            fillRect(x + (i * size) + (i * 2) + (fifth * 2), y + (fifth * 2), fifth, fifth * 2, color);
         }
         
         if (char === "y" || char === ":")
         {
-            fillRect(x + (i * size) + (i * 4) + (fifth * 2), y + (fifth * 3), fifth, fifth * 2, color);
+            fillRect(x + (i * size) + (i * 2) + (fifth * 2), y + (fifth * 3), fifth, fifth * 2, color);
         }
         
         if (char === "z")
         {
-            fillRect(x + (i * size) + (i * 4) + (size - fifth), y + fifth, fifth, fifth, color);
-            fillRect(x + (i * size) + (i * 4) + fifth, y + (fifth * 2), fifth * 3, fifth, color);
+            fillRect(x + (i * size) + (i * 2) + (size - fifth), y + fifth, fifth, fifth, color);
+            fillRect(x + (i * size) + (i * 2) + fifth, y + (fifth * 2), fifth * 3, fifth, color);
         }
         
         if (char === "1")
         {
-            fillRect(x + (i * size) + (i * 4), y, fifth * 2, fifth, color);
+            fillRect(x + (i * size) + (i * 2), y, fifth * 2, fifth, color);
         }
         
         if (char === ":")
         {
-            fillRect(x + (i * size) + (i * 4) + (fifth * 2), y, fifth, fifth * 2, color);
+            fillRect(x + (i * size) + (i * 2) + (fifth * 2), y, fifth, fifth * 2, color);
         }
     }
 }
@@ -199,6 +199,7 @@ function drawText(x, y, size, color, message)
 /External Button Class
 /Modified to fit better with the program
 */
+
 var Button = function(config) {
     this.isButton = true;
     this.xOffset = config.xOffset || 0;
@@ -237,6 +238,7 @@ Button.prototype.handleMouseClick = function() {
 /*
 /Classes
 */
+
 function Text(x, y, size, color, t)
 {
     this.x = x;
@@ -249,6 +251,19 @@ function Text(x, y, size, color, t)
     
     this.draw = function() {
         drawText(this.x, this.y, this.size, this.color, this.t);
+    };
+}
+
+function Rect(x, y, width, height, color)
+{
+    this.x = x;
+    this.y = y;
+    this.width = width;
+    this.height = height;
+    this.color = color;
+    this.update = function() {};
+    this.draw = function() {
+        fillRect(this.x, this.y, this.width, this.height, this.color);
     };
 }
 
@@ -272,6 +287,7 @@ function Scene()
 function Game()
 {
     this.scenes = [ new Scene() ];
+    this.data = {};
     this.currentScene = 0;
     this.update = function() {this.scenes[this.currentScene].update(); };
     this.draw = function() { this.scenes[this.currentScene].draw(); };
@@ -312,6 +328,9 @@ function init()
 
 init();
 
+game.data.score = 0;
+game.currentScene = 1;
+
 //Main menu
 game.scenes[0].objects.push(new Text(5, 10, 15, colors.light, "Snake"));
 game.scenes[0].objects.push(new Button({
@@ -325,5 +344,13 @@ game.scenes[0].objects.push(new Button({
     onClick: function() { game.currentScene = 1; }
 }));
 
+//Game
 game.scenes.push(new Scene());
-game.scenes[1].objects.push(new Text(5, 10, 15, colors.light, "Game"));
+game.scenes[1].objects.push(new Text(1, 2, 5, colors.light, "Score:" + game.data.score));
+//Playing area is 88 pixels high and 96 units wide
+//Each unit of the game are will be 4x4 pixels within the engine (actually 4 * pixelSize)
+//So the game area is 22x24 units
+game.scenes[1].objects.push(new Rect(0, 8, pixelWidth, 2, colors.medLight));
+game.scenes[1].objects.push(new Rect(0, 10, 2, pixelHeight, colors.medLight));
+game.scenes[1].objects.push(new Rect(pixelWidth - 2, 10, 2, pixelHeight, colors.medLight));
+game.scenes[1].objects.push(new Rect(0, pixelHeight - 2, pixelWidth, 2, colors.medLight));
