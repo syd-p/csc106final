@@ -350,10 +350,46 @@ function init()
 /
 */
 
+function Snake(gridx, gridy)
+{
+    this.gridx = gridx;
+    this.gridy = gridy;
+    /*
+    /0 = left
+    /1 = up
+    /2 = right
+    /3 = down
+    */
+    //null stops it from moving for now
+    this.direction = null;
+    this.update = function() 
+    {
+        switch(this.direction)
+        {
+            case 0:
+                this.gridx--;
+                break;
+            case 1:
+                this.gridy--;
+                break;
+            case 2:
+                this.gridx++;
+                break;
+            case 3:
+                this.gridy++;
+                break;
+        }
+    };
+    this.draw = function() 
+    {
+        fillRect((this.gridx * 4) + 2, (this.gridy * 4) + 10, 4, 4, colors.light);
+    };
+}
+
 init();
 
 game.data.score = 0;
-game.currentScene = 0;
+game.currentScene = 1;
 
 //Main menu
 game.scenes[0].objects.push(new Text(5, 10, 15, colors.light, "Snake"));
@@ -373,10 +409,11 @@ game.scenes[0].objects.push(new Button({
 //Adds a new scene
 game.scenes.push(new Scene());
 game.scenes[1].objects.push(new Text(1, 2, 5, colors.light, "Score:" + game.data.score));
-//Playing area is 88 pixels high and 96 units wide
+//Playing area is 88 pixels high and 96 units wide, offset to the right by 2 and from the top by 10
 //Each unit of the game are will be 4x4 pixels within the engine (actually 4 * pixelSize)
 //So the game area is 22x24 units
 game.scenes[1].objects.push(new Rect(0, 8, pixelWidth, 2, colors.medLight));
 game.scenes[1].objects.push(new Rect(0, 10, 2, pixelHeight, colors.medLight));
 game.scenes[1].objects.push(new Rect(pixelWidth - 2, 10, 2, pixelHeight, colors.medLight));
 game.scenes[1].objects.push(new Rect(0, pixelHeight - 2, pixelWidth, 2, colors.medLight));
+game.scenes[1].objects.push(new Snake(5, 1));
