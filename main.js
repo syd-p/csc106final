@@ -3,9 +3,12 @@
 */
 
 //ES5 doesn't have const so just don't modify these
+//The size of a single "pixel" (So a single drawn pixel will actually be 4x4 pixels
 var pixelSize = 4;
+//Width and height of screen in pixels
 var pixelWidth = width / pixelSize;
 var pixelHeight = height / pixelSize;
+//Basic color palatte, not required to be used
 var colors = {
     light: color(208, 208, 88),
     medLight: color(160, 168, 64),
@@ -13,12 +16,14 @@ var colors = {
     dark: color(64, 80, 16)
 };
 
+//Fills a pixel
 function fillPixel(x, y, color)
 {
     fill(color);
     rect(x * pixelSize, y * pixelSize, pixelSize, pixelSize);
 }
 
+//Fills a rectangle
 function fillRect(x, y, width, height, color)
 {
     fill(color);
@@ -28,8 +33,10 @@ function fillRect(x, y, width, height, color)
 //Stay at intervals of 5 otherwise text might get a bit broken
 function drawText(x, y, size, color, message)
 {
+    //Splits text into individual characters
     var chars = message.toLowerCase().split("");
     var fifth = round(size / 5);
+    //The way this functions is kind of a mess but it works well enough
     for (var i in chars)
     {
         var char = chars[i];
@@ -210,6 +217,9 @@ var Button = function(config) {
     this.height = config.height || 50;
     this.label = config.label || "Click";
     this.onClick = config.onClick || function() {};
+    
+    //Needs this to be used with the scene object
+    this.update = function(){};
 };
 
 Button.prototype.draw = function() {
@@ -239,6 +249,7 @@ Button.prototype.handleMouseClick = function() {
 /Classes
 */
 
+//Abstraction of the drawText function, rather than the function being called within the scene, this object holds the parameters so text can easily be added and modified in a scene
 function Text(x, y, size, color, t)
 {
     this.x = x;
@@ -247,6 +258,7 @@ function Text(x, y, size, color, t)
     this.color = color;
     this.t = t;
     
+    //Doesn't actually do anything when update is called, still neccessary as the scene will call .update() on all objects within it
     this.update = function() {};
     
     this.draw = function() {
@@ -254,6 +266,7 @@ function Text(x, y, size, color, t)
     };
 }
 
+//Similar to the text object
 function Rect(x, y, width, height, color)
 {
     this.x = x;
@@ -271,10 +284,18 @@ function Rect(x, y, width, height, color)
 /Scenes
 */
 
+//Keeps track of all the objects in the scene
 function Scene()
 {
     this.objects = [];
-    this.update = function() {};
+    //Updates and draws every object within the scene when scene.update or scene.draw are called
+    this.update = function() 
+    {
+        for (var i in this.objects)
+        {
+            this.objects[i].update();
+        }
+    };
     this.draw = function()
     {
         for (var i in this.objects)
@@ -284,10 +305,12 @@ function Scene()
     };
 }
 
+//Manages the game as a whole, including individual scenes
 function Game()
 {
     this.scenes = [ new Scene() ];
     this.data = {};
+    //Index of the scene  currently being updated and drawn
     this.currentScene = 0;
     this.update = function() {this.scenes[this.currentScene].update(); };
     this.draw = function() { this.scenes[this.currentScene].draw(); };
@@ -299,6 +322,7 @@ function init()
 {
     noStroke();
 
+    //Lowers the fps so the snake's movement can be implemented a bit easier
     frameRate(5);
     
     draw = function() {
@@ -329,10 +353,11 @@ function init()
 init();
 
 game.data.score = 0;
-game.currentScene = 1;
+game.currentScene = 0;
 
 //Main menu
 game.scenes[0].objects.push(new Text(5, 10, 15, colors.light, "Snake"));
+//Start button for the main menu that will move the game to the next scene
 game.scenes[0].objects.push(new Button({
     x: 15,
     y: 40,
@@ -345,6 +370,7 @@ game.scenes[0].objects.push(new Button({
 }));
 
 //Game
+//Adds a new scene
 game.scenes.push(new Scene());
 game.scenes[1].objects.push(new Text(1, 2, 5, colors.light, "Score:" + game.data.score));
 //Playing area is 88 pixels high and 96 units wide
