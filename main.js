@@ -361,9 +361,23 @@ function Snake(gridx, gridy)
     /3 = down
     */
     //null stops it from moving for now
-    this.direction = null;
+    
+    
     this.update = function() 
     {
+        if (keyIsPressed && keyCode === LEFT) {
+        this.direction = 0;    
+        }
+        if (keyIsPressed && keyCode === UP) {
+            this.direction = 1;
+        }
+        if (keyIsPressed && keyCode === RIGHT) {
+            this.direction = 2;
+        }
+        if (keyIsPressed && keyCode === DOWN) {
+            this.direction = 3;
+        }
+        
         switch(this.direction)
         {
             case 0:
@@ -416,4 +430,4 @@ game.scenes[1].objects.push(new Rect(0, 8, pixelWidth, 2, colors.medLight));
 game.scenes[1].objects.push(new Rect(0, 10, 2, pixelHeight, colors.medLight));
 game.scenes[1].objects.push(new Rect(pixelWidth - 2, 10, 2, pixelHeight, colors.medLight));
 game.scenes[1].objects.push(new Rect(0, pixelHeight - 2, pixelWidth, 2, colors.medLight));
-game.scenes[1].objects.push(new Snake(5, 1));
+game.scenes[1].objects.push(new Snake(11, 10));
