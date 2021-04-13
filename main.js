@@ -408,16 +408,17 @@ game.scenes[0].objects.push(new Button({
         game.currentScene = 1;
         keyPressed = function()
         {
-            if (keyCode === LEFT) {
-                game.scenes[1].objects[game.data.snake].direction = 0;    
+            var currentDir = game.scenes[1].objects[game.data.snake].direction;
+            if (keyCode === LEFT && currentDir !== 2) {
+                game.scenes[1].objects[game.data.snake].direction = 0;
             }
-            if (keyCode === UP) {
+            if (keyCode === UP && currentDir !== 3) {
                 game.scenes[1].objects[game.data.snake].direction = 1;
             }
-            if (keyCode === RIGHT) {
+            if (keyCode === RIGHT && currentDir !== 0) {
                 game.scenes[1].objects[game.data.snake].direction = 2;
             }
-            if (keyCode === DOWN) {
+            if (keyCode === DOWN && currentDir !== 1) {
                 game.scenes[1].objects[game.data.snake].direction = 3;
             }
 };
