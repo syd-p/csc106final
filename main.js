@@ -361,23 +361,11 @@ function Snake(gridx, gridy)
     /3 = down
     */
     //null stops it from moving for now
+    this.direction = null;
     
     
     this.update = function() 
     {
-        if (keyIsPressed && keyCode === LEFT) {
-        this.direction = 0;    
-        }
-        if (keyIsPressed && keyCode === UP) {
-            this.direction = 1;
-        }
-        if (keyIsPressed && keyCode === RIGHT) {
-            this.direction = 2;
-        }
-        if (keyIsPressed && keyCode === DOWN) {
-            this.direction = 3;
-        }
-        
         switch(this.direction)
         {
             case 0:
@@ -403,7 +391,7 @@ function Snake(gridx, gridy)
 init();
 
 game.data.score = 0;
-game.currentScene = 1;
+game.currentScene = 0;
 
 //Main menu
 game.scenes[0].objects.push(new Text(5, 10, 15, colors.light, "Snake"));
@@ -416,7 +404,24 @@ game.scenes[0].objects.push(new Button({
     label: "Play",
     xOffset: 4,
     yOffset: 2,
-    onClick: function() { game.currentScene = 1; }
+    onClick: function() { 
+        game.currentScene = 1;
+        keyPressed = function()
+        {
+            if (keyCode === LEFT) {
+                game.scenes[1].objects[game.data.snake].direction = 0;    
+            }
+            if (keyCode === UP) {
+                game.scenes[1].objects[game.data.snake].direction = 1;
+            }
+            if (keyCode === RIGHT) {
+                game.scenes[1].objects[game.data.snake].direction = 2;
+            }
+            if (keyCode === DOWN) {
+                game.scenes[1].objects[game.data.snake].direction = 3;
+            }
+};
+    }
 }));
 
 //Game
@@ -431,3 +436,6 @@ game.scenes[1].objects.push(new Rect(0, 10, 2, pixelHeight, colors.medLight));
 game.scenes[1].objects.push(new Rect(pixelWidth - 2, 10, 2, pixelHeight, colors.medLight));
 game.scenes[1].objects.push(new Rect(0, pixelHeight - 2, pixelWidth, 2, colors.medLight));
 game.scenes[1].objects.push(new Snake(11, 10));
+
+//Index of the snake in the objects array
+game.data.snake = 5;
