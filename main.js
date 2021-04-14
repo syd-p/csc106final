@@ -20,6 +20,7 @@ var colors = {
 function fillPixel(x, y, color)
 {
     fill(color);
+    noStroke();
     rect(x * pixelSize, y * pixelSize, pixelSize, pixelSize);
 }
 
@@ -27,12 +28,24 @@ function fillPixel(x, y, color)
 function fillRect(x, y, width, height, color)
 {
     fill(color);
+    noStroke();
+    rect(x * pixelSize, y * pixelSize, width * pixelSize, height * pixelSize);
+}
+
+//Fills a rectangle with a border
+function fillBorderRect(x, y, width, height, color, border)
+{
+    fill(color);
+    stroke(border);
+    strokeWeight(1);
     rect(x * pixelSize, y * pixelSize, width * pixelSize, height * pixelSize);
 }
 
 //Stay at intervals of 5 otherwise text might get a bit broken
 function drawText(x, y, size, color, message)
 {
+    noStroke();
+    
     //Splits text into individual characters
     var chars = message.toLowerCase().split("");
     var fifth = round(size / 5);
@@ -352,8 +365,9 @@ function init()
 
 function Snake(gridx, gridy)
 {
-    this.gridx = gridx;
-    this.gridy = gridy;
+    this.headX = gridx;
+    this.headY = gridy;
+    this.body = [[12, 10], [13, 10], [14, 10]];
     /*
     /0 = left
     /1 = up
@@ -363,28 +377,42 @@ function Snake(gridx, gridy)
     //null stops it from moving for now
     this.direction = null;
     
+    this.move = function(x, y)
+    {
+        if (this.body.length !== 0)
+        {
+            this.body.pop();
+            this.body.unshift([this.headX, this.headY]);
+        }
+        this.headX += x;
+        this.headY += y;
+    };
     
     this.update = function() 
     {
         switch(this.direction)
         {
             case 0:
-                this.gridx--;
+                this.move(-1, 0);
                 break;
             case 1:
-                this.gridy--;
+                this.move(0, -1);
                 break;
             case 2:
-                this.gridx++;
+                this.move(1, 0);
                 break;
             case 3:
-                this.gridy++;
+                this.move(0, 1);
                 break;
         }
     };
     this.draw = function() 
     {
-        fillRect((this.gridx * 4) + 2, (this.gridy * 4) + 10, 4, 4, colors.light);
+        fillBorderRect((this.headX * 4) + 2, (this.headY * 4) + 10, 4, 4, colors.light, colors.dark);
+        for (var i in this.body)
+        {
+            fillBorderRect((this.body[i][0] * 4) + 2, (this.body[i][1] * 4) + 10, 4, 4, colors.light, colors.dark);
+        }
     };
 }
 
@@ -440,3 +468,5 @@ game.scenes[1].objects.push(new Snake(11, 10));
 
 //Index of the snake in the objects array
 game.data.snake = 5;
+game.data.gridWidth = 22;
+game.data.gridHeight = 24;
