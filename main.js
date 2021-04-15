@@ -405,6 +405,9 @@ function Snake(gridx, gridy)
                 this.move(0, 1);
                 break;
         }
+        if (this.headX < 0 || this.headX > 22 || this.headY < 0 || this.headY > 22){
+            game.currentScene = 2;
+        }
     };
     this.draw = function() 
     {
@@ -465,6 +468,9 @@ game.scenes[1].objects.push(new Rect(0, 10, 2, pixelHeight, colors.medLight));
 game.scenes[1].objects.push(new Rect(pixelWidth - 2, 10, 2, pixelHeight, colors.medLight));
 game.scenes[1].objects.push(new Rect(0, pixelHeight - 2, pixelWidth, 2, colors.medLight));
 game.scenes[1].objects.push(new Snake(11, 10));
+game.scenes.push(new Scene());
+game.scenes[2].objects.push(new Text(15, 20, 5, colors.light, "Game Over"));
+game.scenes[2].objects.push(new Text(5, 40, 5, colors.light, "Final Score:" + game.data.score));
 
 //Index of the snake in the objects array
 game.data.snake = 5;
