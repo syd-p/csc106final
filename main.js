@@ -405,7 +405,8 @@ function Snake(gridx, gridy)
                 this.move(0, 1);
                 break;
         }
-        if (this.headX < 0 || this.headX > 22 || this.headY < 0 || this.headY > 22){
+        
+        if (this.headX < 0 || this.headX >= game.data.gridWidth || this.headY < 0 || this.headY >= game.data.gridHeight){
             game.currentScene = 2;
         }
     };
@@ -462,17 +463,19 @@ game.scenes.push(new Scene());
 game.scenes[1].objects.push(new Text(1, 2, 5, colors.light, "Score:" + game.data.score));
 //Playing area is 88 pixels high and 96 units wide, offset to the right by 2 and from the top by 10
 //Each unit of the game are will be 4x4 pixels within the engine (actually 4 * pixelSize)
-//So the game area is 22x24 units
+//So the game area is 24x22 units
 game.scenes[1].objects.push(new Rect(0, 8, pixelWidth, 2, colors.medLight));
 game.scenes[1].objects.push(new Rect(0, 10, 2, pixelHeight, colors.medLight));
 game.scenes[1].objects.push(new Rect(pixelWidth - 2, 10, 2, pixelHeight, colors.medLight));
 game.scenes[1].objects.push(new Rect(0, pixelHeight - 2, pixelWidth, 2, colors.medLight));
 game.scenes[1].objects.push(new Snake(11, 10));
+
+//Game over
 game.scenes.push(new Scene());
 game.scenes[2].objects.push(new Text(15, 20, 5, colors.light, "Game Over"));
 game.scenes[2].objects.push(new Text(5, 40, 5, colors.light, "Final Score:" + game.data.score));
 
 //Index of the snake in the objects array
 game.data.snake = 5;
-game.data.gridWidth = 22;
-game.data.gridHeight = 24;
+game.data.gridWidth = 24;
+game.data.gridHeight = 22;
