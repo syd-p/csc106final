@@ -475,6 +475,23 @@ game.scenes.push(new Scene());
 game.scenes[2].objects.push(new Text(15, 20, 5, colors.light, "Game Over"));
 game.scenes[2].objects.push(new Text(5, 40, 5, colors.light, "Final Score:" + game.data.score));
 
+//Reset button
+game.scenes[2].objects.push(new Button({
+    x: 30,
+    y: 60,
+    width: 40,
+    height: 10,
+    label: "Reset",
+    xOffset: 4,
+    yOffset: 2,
+    onClick: function() { 
+        game.currentScene = 1;
+        game.scenes[1].objects[5].headX = 11;
+        game.scenes[1].objects[5].headY = 10;
+        game.scenes[1].objects[5].body = [[12, 10], [13, 10], [14, 10]];
+    }
+}));
+
 //Index of the snake in the objects array
 game.data.snake = 5;
 game.data.gridWidth = 24;
