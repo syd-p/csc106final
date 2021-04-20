@@ -367,15 +367,16 @@ function Snake(gridx, gridy)
 {
     this.headX = gridx;
     this.headY = gridy;
-    this.body = [[12, 10], [13, 10], [14, 10]];
+    this.body = [];
     /*
     /0 = left
     /1 = up
     /2 = right
     /3 = down
     */
-    //null stops it from moving for now
-    this.direction = null;
+    //-1 stops it from moving for now
+    this.direction = -1;
+    this.nextDirection = -1;
     
     this.move = function(x, y)
     {
@@ -390,6 +391,8 @@ function Snake(gridx, gridy)
     
     this.update = function() 
     {
+        this.direction = this.nextDirection;
+        
         switch(this.direction)
         {
             case 0:
@@ -442,16 +445,16 @@ game.scenes[0].objects.push(new Button({
         {
             var currentDir = game.scenes[1].objects[game.data.snake].direction;
             if (keyCode === LEFT && currentDir !== 2) {
-                game.scenes[1].objects[game.data.snake].direction = 0;
+                game.scenes[1].objects[game.data.snake].nextDirection = 0;
             }
             if (keyCode === UP && currentDir !== 3) {
-                game.scenes[1].objects[game.data.snake].direction = 1;
+                game.scenes[1].objects[game.data.snake].nextDirection = 1;
             }
             if (keyCode === RIGHT && currentDir !== 0) {
-                game.scenes[1].objects[game.data.snake].direction = 2;
+                game.scenes[1].objects[game.data.snake].nextDirection = 2;
             }
             if (keyCode === DOWN && currentDir !== 1) {
-                game.scenes[1].objects[game.data.snake].direction = 3;
+                game.scenes[1].objects[game.data.snake].nextDirection = 3;
             }
 };
     }
@@ -488,7 +491,9 @@ game.scenes[2].objects.push(new Button({
         game.currentScene = 1;
         game.scenes[1].objects[5].headX = 11;
         game.scenes[1].objects[5].headY = 10;
-        game.scenes[1].objects[5].body = [[12, 10], [13, 10], [14, 10]];
+        game.scenes[1].objects[5].body = [];
+        game.scenes[1].objects[5].direction = -1;
+        game.scenes[1].objects[5].nextDirection = -1;
     }
 }));
 
