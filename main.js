@@ -405,6 +405,22 @@ function Snake(gridx, gridy)
         
         this.headX += x;
         this.headY += y;
+        
+        var foodX = game.scenes[1].objects[game.data.food].x;
+        var foodY = game.scenes[1].objects[game.data.food].y;
+        
+        //Checks if the snake has touched the food
+        if (this.headX === foodX && this.headY === foodY)
+        {
+            this.grow = true;
+            //Move the food and add to the score
+            game.scenes[1].objects[game.data.food].randomize();
+            game.data.score++;
+            
+            //Update score texts
+            game.scenes[1].objects[0].t = "Score:" + game.data.score;
+            game.scenes[2].objects[1].t = "Final Score:" + game.data.score;
+        }
     };
     
     this.update = function() 
@@ -438,6 +454,25 @@ function Snake(gridx, gridy)
         {
             fillBorderRect((this.body[i][0] * 4) + 2, (this.body[i][1] * 4) + 10, 4, 4, colors.light, colors.dark);
         }
+    };
+}
+
+function Food()
+{
+    this.x = 0;
+    this.y = 0;
+    
+    this.randomize = function()
+    {
+        this.x = round(random(0, game.data.gridWidth - 1));
+        this.y = round(random(0, game.data.gridHeight - 1));
+    };
+    
+    this.update = function() {};
+    
+    this.draw = function() 
+    {
+        fillBorderRect((this.x * 4) + 2, (this.y * 4) + 10, 4, 4, colors.medLight, colors.dark);
     };
 }
 
@@ -490,6 +525,7 @@ game.scenes[1].objects.push(new Rect(0, 10, 2, pixelHeight, colors.medLight));
 game.scenes[1].objects.push(new Rect(pixelWidth - 2, 10, 2, pixelHeight, colors.medLight));
 game.scenes[1].objects.push(new Rect(0, pixelHeight - 2, pixelWidth, 2, colors.medLight));
 game.scenes[1].objects.push(new Snake(11, 10));
+game.scenes[1].objects.push(new Food());
 
 //Game over
 game.scenes.push(new Scene());
@@ -515,7 +551,10 @@ game.scenes[2].objects.push(new Button({
     }
 }));
 
-//Index of the snake in the objects array
-game.data.snake = 5;
 game.data.gridWidth = 24;
 game.data.gridHeight = 22;
+//Index of the snake in the objects array
+game.data.snake = 5;
+//Index of the food in the objects array
+game.data.food = 6;
+game.scenes[1].objects[game.data.food].randomize();
