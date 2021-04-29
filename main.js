@@ -378,13 +378,31 @@ function Snake(gridx, gridy)
     this.direction = -1;
     this.nextDirection = -1;
     
+    //Determines if the snake will grow next update
+    this.grow = false;
+    
     this.move = function(x, y)
     {
         if (this.body.length !== 0)
         {
-            this.body.pop();
+            if (!this.grow)
+            {
+                this.body.pop();
+            } else
+            {
+                this.grow = false;
+            }
+            
             this.body.unshift([this.headX, this.headY]);
+        } else
+        {
+            if (this.grow)
+            {
+                this.body.push([this.headX, this.headY]);
+                this.grow = false;
+            }
         }
+        
         this.headX += x;
         this.headY += y;
     };
