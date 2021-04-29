@@ -403,8 +403,8 @@ function Snake(gridx, gridy)
             }
         }
         
-        this.headX += x;
-        this.headY += y;
+        this.headX = (this.headX + x + game.data.gridWidth) % game.data.gridWidth;
+        this.headY = (this.headY + y + game.data.gridHeight) % game.data.gridHeight;
         
         var foodX = game.scenes[1].objects[game.data.food].x;
         var foodY = game.scenes[1].objects[game.data.food].y;
@@ -441,10 +441,6 @@ function Snake(gridx, gridy)
             case 3:
                 this.move(0, 1);
                 break;
-        }
-        
-        if (this.headX < 0 || this.headX >= game.data.gridWidth || this.headY < 0 || this.headY >= game.data.gridHeight){
-            game.currentScene = 2;
         }
     };
     this.draw = function() 
