@@ -31,6 +31,8 @@ var palettes = {
 };
 var colors = colors || palettes.gameboy;
 
+var highscore = highscore || 0;
+
 //Fills a pixel
 function fillPixel(x, y, color)
 {
@@ -435,6 +437,10 @@ function Snake(gridx, gridy)
             //Update score texts
             game.scenes[1].objects[0].t = "Score:" + game.data.score;
             game.scenes[2].objects[1].t = "Final Score:" + game.data.score;
+            if (game.data.score > highscore){
+                highscore = game.data.score;    
+            }
+            game.scenes[2].objects[2].t = "Highscore:" + highscore;
         }
     };
     
@@ -560,6 +566,7 @@ game.scenes[1].objects.push(new Food());
 game.scenes.push(new Scene());
 game.scenes[2].objects.push(new Text(15, 20, 5, "light", "Game Over"));
 game.scenes[2].objects.push(new Text(5, 40, 5, "light", "Final Score:" + game.data.score));
+game.scenes[2].objects.push(new Text(10, 55, 5, "light", "Highscore:" + highscore));
 //Reset button
 game.scenes[2].objects.push(new Button({
     x: 30,
