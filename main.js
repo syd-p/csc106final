@@ -38,7 +38,7 @@ var highscore = highscore || 0;
 */
 
 //Will's bitmoji (x value, y value, size)
-var drawHead = function(xPos,yPos,bitmojiHeight){
+var drawWillHead = function(xPos,yPos,bitmojiHeight){
     noStroke();
     fill(255, 224, 189);  //skin tone
     ellipse(xPos, yPos, 80*bitmojiHeight/150, 96*bitmojiHeight/150);  //head
@@ -66,7 +66,7 @@ var drawHead = function(xPos,yPos,bitmojiHeight){
     line(xPos - 12 * bitmojiHeight / 150, yPos + 24 * bitmojiHeight / 150, xPos + 17 *     bitmojiHeight / 150, yPos + 24 * bitmojiHeight / 150);  //top of mouth
 };
 
-var drawBody = function(xPos,yPos,bitmojiHeight){
+var drawWillBody = function(xPos,yPos,bitmojiHeight){
     fill(247, 22, 22);  //shirt color
     quad(xPos + 29 * bitmojiHeight / 150, yPos + 38 * bitmojiHeight / 150, xPos + 50 *     bitmojiHeight / 150, yPos + 80 * bitmojiHeight / 150, xPos - 49 * bitmojiHeight /      150 , yPos + 80 * bitmojiHeight / 150, xPos -27 * bitmojiHeight / 150, yPos + 39 *     bitmojiHeight / 150);  //shirt
     fill(255, 224, 189);  //skin tone
@@ -76,11 +76,62 @@ var drawBody = function(xPos,yPos,bitmojiHeight){
     text("WB", xPos - 17 * bitmojiHeight / 150, yPos + 69 * bitmojiHeight / 150);
 };
 
-var drawBitmoji = function(xPos,yPos,bitmojiHeight){
-    drawHead(xPos, yPos, bitmojiHeight);
-    drawBody(xPos, yPos, bitmojiHeight);
+var drawWillBitmoji = function(xPos,yPos,bitmojiHeight){
+    drawWillHead(xPos, yPos, bitmojiHeight);
+    drawWillBody(xPos, yPos, bitmojiHeight);
 };
 
+function drawSydHead(x, y, h)
+{
+    var size = h / 100;
+    
+    noStroke();
+    fill(255, 224, 189);
+    ellipse(x * size, y * size, 80 * size, 93 * size);
+    fill(255, 255, 255);
+    arc((x - 42) * size, (y + 37) * size, 26 * size, 66 * size, 0, 361);
+    arc((x + 42) * size, (y + 37) * size, 26 * size, 66 * size, 0, 361);
+    fill(89, 54, 1);
+    quad((x - 52) * size, (y + 54) * size, (x - 42) * size, (y - 29) * size, (x - 6) * size, (y - 50) * size, (x - 31) * size, (y - 10) * size);
+    quad((x + 56) * size, (y + 54) * size, (x + 41) * size, (y - 29) * size, (x + 2) * size, (y - 50) * size, (x + 28) * size, (y - 10) * size);
+    fill(0, 0, 0);
+    quad((x + 41) * size, (y - 27) * size, (x - 43) * size, (y - 25) * size, (x - 31) * size, (y - 54) * size, (x + 34) * size, (y - 49) * size);
+    arc((x + 2) * size, (y - 49) * size, 67 * size, 40 * size, 196, 373);
+    stroke(0, 0, 0);
+    fill(255, 224, 189);
+    rect((x - 24) * size, (y - 5) * size, 20 * size, 12 * size);
+    rect((x + 3) * size, (y - 5) * size, 20 * size, 12 * size);
+    line((x - 4) * size, (y + 1) * size, (x + 3) * size, (y + 1) * size);
+    line((x - 35) * size, (y + 1) * size, (x - 24) * size, (y + 1) * size);
+    line((x + 23) * size, (y + 1) * size, (x + 32) * size, (y + 1) * size);
+    fill(54, 38, 1);
+    ellipse((x - 14) * size, (y + 2) * size, 6 * size, 4 * size);
+    ellipse((x + 13) * size, (y + 2) * size, 6 * size, 4 * size);
+    fill(255, 224, 189);
+    bezier(x * size, (y + 6) * size, (x + 9) * size, (y + 14) * size, x * size, (y + 14) * size, (x - 4) * size, (y + 15) * size);
+    arc(x * size, (y + 29) * size, 29 * size, 6 * size, 0, 180);
+}
+
+function drawSydBody(x, y, h)
+{
+    var size = h / 100;
+    
+    fill(43, 43, 43);
+    quad((x - 38) * size , (y + 47) * size, (x - 22) * size, (y + 80) * size, (x + 42) * size, (y + 82) * size, (x + 39) * size, (y + 49) * size);
+    fill(0, 0, 0);
+    quad((x - 48) * size, (y + 43) * size, (x - 48) * size, (y + 80) * size, (x - 10) * size, (y + 81) * size, (x - 17) * size, (y + 43) * size);
+    quad((x + 16) * size, (y + 43) * size, (x + 12) * size, (y + 80) * size, (x + 42) * size, (y + 82) * size, (x + 51) * size, (y + 43) * size);
+}
+
+function drawSydBitmoji(x, y, h)
+{
+    drawSydHead(x, y, h);
+    drawSydBody(x, y, h);
+}
+
+/*
+/Basic Functions
+*/
 
 //Fills a pixel
 function fillPixel(x, y, color)
