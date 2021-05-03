@@ -457,6 +457,7 @@ function Snake(gridx, gridy)
                 this.move(0, 1);
                 break;
         }
+        
         for (var i = 0; i < this.body.length; i++){
             if (this.headX === this.body[i][0] && this.headY === this.body[i][1]) {
                 game.currentScene = 2;
@@ -575,6 +576,9 @@ game.scenes[2].objects.push(new Button({
         game.scenes[1].objects[5].body = [];
         game.scenes[1].objects[5].direction = -1;
         game.scenes[1].objects[5].nextDirection = -1;
+        game.data.score = 0;
+        game.scenes[1].objects[0].t = "Score:" + game.data.score;
+        game.scenes[2].objects[1].t = "Final Score:" + game.data.score;
     }
 }));
 
