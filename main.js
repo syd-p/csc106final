@@ -555,6 +555,8 @@ game.currentScene = 0;
 
 //Main menu
 game.scenes[0].objects.push(new Text(5, 10, 15, "light", "Snake"));
+game.scenes[0].objects.push(new Text(2, 80, 5, "light", "Syd Phillips"));
+game.scenes[0].objects.push(new Text(2, 90, 5, "light", "Will Burbine"));
 //Start button for the main menu that will move the game to the next scene
 game.scenes[0].objects.push(new Button({
     x: 15,
