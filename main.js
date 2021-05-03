@@ -33,6 +33,55 @@ var colors = colors || palettes.gameboy;
 
 var highscore = highscore || 0;
 
+/*
+/Bitmojis
+*/
+
+//Will's bitmoji (x value, y value, size)
+var drawHead = function(xPos,yPos,bitmojiHeight){
+    noStroke();
+    fill(255, 224, 189);  //skin tone
+    ellipse(xPos, yPos, 80*bitmojiHeight/150, 96*bitmojiHeight/150);  //head
+    fill(255, 255, 255);
+    arc(xPos-40 * bitmojiHeight / 150, yPos+36*bitmojiHeight/150, 28*bitmojiHeight/150,      55 * bitmojiHeight/150, 0, 367);  //left chisel
+    arc(xPos + 42 * bitmojiHeight / 150, yPos + 34 * bitmojiHeight / 150, 28 *             bitmojiHeight / 150 , 55 * bitmojiHeight / 150, 0, 367);  //right chisel
+    fill(171, 92, 55);  //hair color
+    quad(xPos - 40 * bitmojiHeight / 150, yPos, xPos - 32 * bitmojiHeight / 150, yPos      - 29*bitmojiHeight / 150, xPos - 13 * bitmojiHeight / 150, yPos - 46 * bitmojiHeight / 150, xPos - 36 * bitmojiHeight / 150, yPos);  //left hair
+    quad(xPos + 40 * bitmojiHeight / 150, yPos - 2 * bitmojiHeight / 150, xPos + 32 *      bitmojiHeight / 150 , yPos - 30 * bitmojiHeight / 150, xPos + 11 * bitmojiHeight /     150, yPos - 48 * bitmojiHeight / 150, xPos + 39 * bitmojiHeight / 150, yPos);          //right hair
+    ellipse(xPos, yPos - 39 * bitmojiHeight / 150, 58 * bitmojiHeight / 150, -23 *         bitmojiHeight / 150);     //top hair
+    fill(255, 255, 255);
+    ellipse(xPos - 11 * bitmojiHeight / 150, yPos - 5 * bitmojiHeight / 150, 15 *          bitmojiHeight / 150, 10 * bitmojiHeight / 150);  //left eye 
+    ellipse(xPos + 15 * bitmojiHeight / 150, yPos - 5 * bitmojiHeight / 150, 15 *          bitmojiHeight / 150, 10 * bitmojiHeight / 150);  //right eye 
+    fill(171, 92, 55);  //eye color
+    ellipse(xPos - 10 * bitmojiHeight / 150, yPos - 5 * bitmojiHeight / 150, 5 *           bitmojiHeight / 150, 5 * bitmojiHeight / 150);  //left eye ball
+    ellipse(xPos + 15 * bitmojiHeight / 150, yPos - 5 * bitmojiHeight / 150, 5 *           bitmojiHeight / 150, 5 * bitmojiHeight / 150);  //right eye ball
+    fill(171, 92, 55);  //hair color
+    arc(xPos - 11 * bitmojiHeight / 150, yPos - 14 *bitmojiHeight / 150, 19 * bitmojiHeight / 150, 5 * bitmojiHeight / 150, 180, 360);  //left eyebrow
+    arc(xPos + 13 * bitmojiHeight / 150, yPos - 14 * bitmojiHeight / 150, 20 *             bitmojiHeight / 150, 5 * bitmojiHeight / 150, 180, 360);  //right eyebrow
+    stroke(0,0,0);
+    fill(255, 224, 189);  //skin tone
+    bezier(xPos + 2 * bitmojiHeight / 150, yPos, xPos + 26 * bitmojiHeight / 150, yPos + 22 * bitmojiHeight / 150, xPos - 7 * bitmojiHeight / 150, yPos + 17 * bitmojiHeight /     150, xPos, yPos + 12 * bitmojiHeight / 150);  //nose
+    fill(255,255,255);  //white for teeth
+    arc(xPos + 3 * bitmojiHeight / 150, yPos + 25 * bitmojiHeight / 150, 30 * bitmojiHeight / 150, 13 * bitmojiHeight / 150, 1, 180);  //mouth
+    line(xPos - 12 * bitmojiHeight / 150, yPos + 24 * bitmojiHeight / 150, xPos + 17 *     bitmojiHeight / 150, yPos + 24 * bitmojiHeight / 150);  //top of mouth
+};
+
+var drawBody = function(xPos,yPos,bitmojiHeight){
+    fill(247, 22, 22);  //shirt color
+    quad(xPos + 29 * bitmojiHeight / 150, yPos + 38 * bitmojiHeight / 150, xPos + 50 *     bitmojiHeight / 150, yPos + 80 * bitmojiHeight / 150, xPos - 49 * bitmojiHeight /      150 , yPos + 80 * bitmojiHeight / 150, xPos -27 * bitmojiHeight / 150, yPos + 39 *     bitmojiHeight / 150);  //shirt
+    fill(255, 224, 189);  //skin tone
+    arc(xPos + 1 * bitmojiHeight / 150, yPos + 38 * bitmojiHeight / 150, 55 * bitmojiHeight / 150, 23 * bitmojiHeight / 150, -12, 180);  //dip for shirt
+    fill(0,0,0);
+    textSize( 20 * bitmojiHeight / 150);
+    text("WB", xPos - 17 * bitmojiHeight / 150, yPos + 69 * bitmojiHeight / 150);
+};
+
+var drawBitmoji = function(xPos,yPos,bitmojiHeight){
+    drawHead(xPos, yPos, bitmojiHeight);
+    drawBody(xPos, yPos, bitmojiHeight);
+};
+
+
 //Fills a pixel
 function fillPixel(x, y, color)
 {
