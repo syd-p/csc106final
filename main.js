@@ -9,12 +9,27 @@ var pixelSize = 4;
 var pixelWidth = width / pixelSize;
 var pixelHeight = height / pixelSize;
 //Basic color palatte, not required to be used
-var colors = {
-    light: color(208, 208, 88),
-    medLight: color(160, 168, 64),
-    medium: color(112, 128, 40),
-    dark: color(64, 80, 16)
+var palettes = {
+    gameboy: {
+        light: color(208, 208, 88),
+        medLight: color(160, 168, 64),
+        medium: color(112, 128, 40),
+        dark: color(64, 80, 16)
+    },
+    arid: {
+        light: color(246, 220, 191),
+        medLight: color(247, 164, 64),
+        medium: color(170, 170, 170),
+        dark: color(225, 112, 26)
+    },
+    pastel: {
+        light: color(250, 227, 217),
+        medLight: color(255, 182, 185),
+        medium: color(187, 222, 214),
+        dark: color(97, 192, 191)
+    }
 };
+var colors = colors || palettes.gameboy;
 
 //Fills a pixel
 function fillPixel(x, y, color)
@@ -275,7 +290,7 @@ function Text(x, y, size, color, t)
     this.update = function() {};
     
     this.draw = function() {
-        drawText(this.x, this.y, this.size, this.color, this.t);
+        drawText(this.x, this.y, this.size, colors[this.color], this.t);
     };
 }
 
@@ -289,7 +304,7 @@ function Rect(x, y, width, height, color)
     this.color = color;
     this.update = function() {};
     this.draw = function() {
-        fillRect(this.x, this.y, this.width, this.height, this.color);
+        fillRect(this.x, this.y, this.width, this.height, colors[this.color]);
     };
 }
 
@@ -478,7 +493,7 @@ game.data.score = 0;
 game.currentScene = 0;
 
 //Main menu
-game.scenes[0].objects.push(new Text(5, 10, 15, colors.light, "Snake"));
+game.scenes[0].objects.push(new Text(5, 10, 15, "light", "Snake"));
 //Start button for the main menu that will move the game to the next scene
 game.scenes[0].objects.push(new Button({
     x: 15,
@@ -508,26 +523,37 @@ game.scenes[0].objects.push(new Button({
 };
     }
 }));
+game.scenes[0].objects.push(new Button({
+    x: 15,
+    y: 60,
+    width: 65,
+    height: 10,
+    label: "Palettes",
+    xOffset: 4,
+    yOffset: 2,
+    onClick: function() { 
+        game.currentScene = 3;
+    }
+}));
 
 //Game
 //Adds a new scene
 game.scenes.push(new Scene());
-game.scenes[1].objects.push(new Text(1, 2, 5, colors.light, "Score:" + game.data.score));
+game.scenes[1].objects.push(new Text(1, 2, 5, "light", "Score:" + game.data.score));
 //Playing area is 88 pixels high and 96 units wide, offset to the right by 2 and from the top by 10
 //Each unit of the game are will be 4x4 pixels within the engine (actually 4 * pixelSize)
 //So the game area is 24x22 units
-game.scenes[1].objects.push(new Rect(0, 8, pixelWidth, 2, colors.medLight));
-game.scenes[1].objects.push(new Rect(0, 10, 2, pixelHeight, colors.medLight));
-game.scenes[1].objects.push(new Rect(pixelWidth - 2, 10, 2, pixelHeight, colors.medLight));
-game.scenes[1].objects.push(new Rect(0, pixelHeight - 2, pixelWidth, 2, colors.medLight));
+game.scenes[1].objects.push(new Rect(0, 8, pixelWidth, 2, "medLight"));
+game.scenes[1].objects.push(new Rect(0, 10, 2, pixelHeight, "medLight"));
+game.scenes[1].objects.push(new Rect(pixelWidth - 2, 10, 2, pixelHeight, "medLight"));
+game.scenes[1].objects.push(new Rect(0, pixelHeight - 2, pixelWidth, 2, "medLight"));
 game.scenes[1].objects.push(new Snake(11, 10));
 game.scenes[1].objects.push(new Food());
 
 //Game over
 game.scenes.push(new Scene());
-game.scenes[2].objects.push(new Text(15, 20, 5, colors.light, "Game Over"));
-game.scenes[2].objects.push(new Text(5, 40, 5, colors.light, "Final Score:" + game.data.score));
-
+game.scenes[2].objects.push(new Text(15, 20, 5, "light", "Game Over"));
+game.scenes[2].objects.push(new Text(5, 40, 5, "light", "Final Score:" + game.data.score));
 //Reset button
 game.scenes[2].objects.push(new Button({
     x: 30,
@@ -544,6 +570,59 @@ game.scenes[2].objects.push(new Button({
         game.scenes[1].objects[5].body = [];
         game.scenes[1].objects[5].direction = -1;
         game.scenes[1].objects[5].nextDirection = -1;
+    }
+}));
+
+//Color palette screen
+game.scenes.push(new Scene());
+//Return button
+game.scenes[3].objects.push(new Button({
+    x: 5,
+    y: 5,
+    width: 35,
+    height: 10,
+    label: "Exit",
+    xOffset: 4,
+    yOffset: 2,
+    onClick: function() { 
+        game.currentScene = 0;
+    }
+}));
+//Palettes
+game.scenes[3].objects.push(new Button({
+    x: 20,
+    y: 30,
+    width: 55,
+    height: 10,
+    label: "Gameboy",
+    xOffset: 4,
+    yOffset: 2,
+    onClick: function() { 
+        colors = palettes.gameboy;
+    }
+}));
+game.scenes[3].objects.push(new Button({
+    x: 20,
+    y: 50,
+    width: 35,
+    height: 10,
+    label: "Arid",
+    xOffset: 4,
+    yOffset: 2,
+    onClick: function() { 
+        colors = palettes.arid;
+    }
+}));
+game.scenes[3].objects.push(new Button({
+    x: 20,
+    y: 70,
+    width: 50,
+    height: 10,
+    label: "Pastel",
+    xOffset: 4,
+    yOffset: 2,
+    onClick: function() { 
+        colors = palettes.pastel;
     }
 }));
 
