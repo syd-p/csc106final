@@ -457,6 +457,11 @@ function Snake(gridx, gridy)
                 this.move(0, 1);
                 break;
         }
+        for (var i = 0; i < this.body.length; i++){
+            if (this.headX === this.body[i][0] && this.headY === this.body[i][1]) {
+                game.currentScene = 2;
+            }
+        }
     };
     this.draw = function() 
     {
