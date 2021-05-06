@@ -410,6 +410,12 @@ function Rect(x, y, width, height, color)
     };
 }
 
+function CustomDraw(draw)
+{
+    this.update = function() {};
+    this.draw = draw;
+}
+
 /*
 /Scenes
 */
@@ -608,6 +614,11 @@ game.currentScene = 0;
 game.scenes[0].objects.push(new Text(5, 10, 15, "light", "Snake"));
 game.scenes[0].objects.push(new Text(2, 80, 5, "light", "Syd Phillips"));
 game.scenes[0].objects.push(new Text(2, 90, 5, "light", "Will Burbine"));
+game.scenes[0].objects.push(new CustomDraw(function()
+{
+    drawSydBitmoji(370 * 3, 320 * 3, 33);
+    drawWillBitmoji(370, 365, 50);
+}));
 //Start button for the main menu that will move the game to the next scene
 game.scenes[0].objects.push(new Button({
     x: 15,
@@ -663,6 +674,11 @@ game.scenes[1].objects.push(new Rect(pixelWidth - 2, 10, 2, pixelHeight, "medLig
 game.scenes[1].objects.push(new Rect(0, pixelHeight - 2, pixelWidth, 2, "medLight"));
 game.scenes[1].objects.push(new Snake(11, 10));
 game.scenes[1].objects.push(new Food());
+game.scenes[1].objects.push(new CustomDraw(function()
+{
+    drawSydBitmoji(300 * 5, 15 * 5, 20);
+    drawWillBitmoji(370, 15, 30);
+}));
 
 //Game over
 game.scenes.push(new Scene());
@@ -672,7 +688,7 @@ game.scenes[2].objects.push(new Text(10, 55, 5, "light", "Highscore:" + highscor
 //Reset button
 game.scenes[2].objects.push(new Button({
     x: 30,
-    y: 60,
+    y: 80,
     width: 40,
     height: 10,
     label: "Reset",
